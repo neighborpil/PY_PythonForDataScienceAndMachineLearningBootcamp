@@ -16,6 +16,12 @@ example codes
 > condal create --name python35withnumpy python=3.5 numpy
 ```
 
+## Starting Jupyter Notebook
+```
+> cd C:\Work\GitRepository\PY_PythonForDataScienceAndMachineLearningBootcamp
+> jupyter notebook
+```
+
 # Python basics
 ```
 for x in range(0,5):
