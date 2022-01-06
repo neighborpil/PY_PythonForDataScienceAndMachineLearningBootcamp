@@ -199,8 +199,344 @@ arr.dtype
 # arr.dtype
 
 
+```
+
+### numpy array 복사
+1. 참조복사
+ - sub array를 만들어 값을 바꾸면 기존의 array의 값도 바뀐다
+```
+arr = np.arange(0, 11)
+slice_of_array = arr[0:6]
+```
+2. 깊은 복사
+ - .copy()로 명시를 해줘야 한다
+```
+arr = np.arange(0, 11)
+deep_copied = arr.copy()
+```
+
+### numpy array indexing and selection examples
+```
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
 
 
+import numpy as np
 
+
+# In[2]:
+
+
+arr = np.arange(0, 11)
+
+
+# In[3]:
+
+
+arr
+
+
+# In[4]:
+
+
+arr[8]
+
+
+# In[5]:
+
+
+arr[1:5]
+
+
+# In[6]:
+
+
+arr[0:5]
+
+
+# In[7]:
+
+
+arr[0:6]
+
+
+# In[8]:
+
+
+arr[5:]
+
+
+# In[10]:
+
+
+arr[0:5] = 100
+
+
+# In[11]:
+
+
+arr
+
+
+# In[13]:
+
+
+arr = np.arange(0, 11)
+
+
+# In[14]:
+
+
+arr
+
+
+# In[15]:
+
+
+slice_of_arr = arr[0:6]
+
+
+# In[16]:
+
+
+slice_of_arr
+
+
+# In[19]:
+
+
+slice_of_arr[:] = 99
+
+
+# In[20]:
+
+
+slice_of_arr
+
+
+# In[22]:
+
+
+arr
+
+
+# In[23]:
+
+
+arr_copy = arr.copy()
+
+
+# In[24]:
+
+
+arr_copy
+
+
+# In[25]:
+
+
+arr_copy[:] = 100
+
+
+# In[26]:
+
+
+arr_copy
+
+
+# In[27]:
+
+
+arr
+
+
+# In[28]:
+
+
+arr_2d = np.array([[5,10,15],[20,25,30],[35,40,45]])
+
+
+# In[29]:
+
+
+arr_2d
+
+
+# In[30]:
+
+
+arr_2d[0][0]
+
+
+# In[31]:
+
+
+arr_2d[0]
+
+
+# In[32]:
+
+
+arr_2d[1]
+
+
+# In[33]:
+
+
+arr_2d[1][1]
+
+
+# In[34]:
+
+
+arr_2d[2,1]
+
+
+# In[35]:
+
+
+arr_2d[:2,1:]
+
+
+# In[36]:
+
+
+arr_2d[:2]
 
 ```
+
+#### numpy divide by 0
+ - 그냥 파이썬 array는 에러 띄운다
+ - numpy는 nan or inf으로 표시하고 에러는 띄우지 않는다
+ - 대신 경고는 띄운다
+
+#### numpy universal functions
+ - https://docs.scipy.org/doc/numpy/reference/ufuncs.html
+
+#### numpy operations
+```
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
+import numpy as np
+
+
+# In[2]:
+
+
+arr = np.arange(0, 11)
+
+
+# In[3]:
+
+
+arr
+
+
+# In[4]:
+
+
+arr + arr
+
+
+# In[5]:
+
+
+arr
+
+
+# In[6]:
+
+
+arr - arr
+
+
+# In[7]:
+
+
+arr * arr
+
+
+# In[8]:
+
+
+arr + 100
+
+
+# In[9]:
+
+
+arr * 100
+
+
+# In[10]:
+
+
+arr -100
+
+
+# In[11]:
+
+
+1 / 0
+
+
+# In[12]:
+
+
+arr /arr
+
+
+# In[13]:
+
+
+1 / arr
+
+
+# In[14]:
+
+
+arr ** 2
+
+
+# In[15]:
+
+
+np.sqrt(arr)
+
+
+# In[16]:
+
+
+np.exp(arr)
+
+
+# In[17]:
+
+
+np.max(arr)
+
+
+# In[18]:
+
+
+arr.max()
+
+
+# In[19]:
+
+
+np.sin(arr)
+
+
+# In[20]:
+
+
+np.log(arr)
+```
+
