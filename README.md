@@ -957,3 +957,9 @@ mat.sum(axis=0)
 
 
 ```
+
+## Pandas
+ - python version of excel
+
+### Data Type of Pandas
+ - series
