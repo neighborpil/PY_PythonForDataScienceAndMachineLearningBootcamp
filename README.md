@@ -22,6 +22,11 @@ example codes
 > jupyter notebook
 ```
 
+## Tensorboard
+ - google library that estimate the model is good or not
+ - https://www.tensorflow.org/tensorboard/tensorboard_in_notebooks
+
+
 # Python basics
 ```
 for x in range(0,5):
