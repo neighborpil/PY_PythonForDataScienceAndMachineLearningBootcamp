@@ -26,6 +26,104 @@ example codes
  - google library that estimate the model is good or not
  - https://www.tensorflow.org/tensorboard/tensorboard_in_notebooks
 
+## PySpark
+ - 패키지 다운로드 주소: https://mirrors.estointernet.in/apache/spark/spark-3.2.1/
+ 
+## AWS EC2에 jupyter notebook과 pyspark 설치하는 법
+ - This code is based on udemy comment below
+    https://www.udemy.com/course/python-for-data-science-and-machine-learning-bootcamp/learn/lecture/5784658#questions/12969260
+ 
+```
+If you are struggling in PySpark setup then please follow below-mentioned code word by word:
+
+I have checked with various versions of python and Spark compatibility and the one which worked for me is 2020.02 (Feb 2020) version (Else I was getting Numpy errors and few other errors while running code in Jupyter Notebook)
+First, you needed to clean everything from your virtual machine, by running this command:
+$ rm -rfv / home/ubuntu /{*,.*}
+Getting Anaconda:
+$ wget http://repo.continuum.io/archive/Anaconda3-2020.02-Linux-x86_64.sh
+$ bash Anaconda3-2020.02-Linux-x86_64.sh
+then run:
+$ source ~/.bashrc
+This will change your environment to Conda's (Base)
+(base) ubuntu@ip-172-31-16-113
+now we will install everything in this environment only:
+
+let's check the version of Python:
+$ which python
+/home/ubuntu/anaconda3/bin/python
+$ python --version
+it will give you -- Python 3.7.6
+Now run below codes for configuration of Jupyter Notebook and connection with EC2
+$ jupyter notebook --generate-config
+$ mkdir certs
+$ cd certs
+$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
+$ sudo chmod 777 mycert.pem
+$ cd ~/.jupyter/
+$ vi jupyter_notebook_config.py
+press "i" and the paste this in file:
+# Configuration file for jupyter-notebook.
+c = get_config()
+# Notebook config this is where you saved your pem cert
+c.NotebookApp.certfile = u'/home/ubuntu/certs/mycert.pem'
+# Listen on all IPs
+c.NotebookApp.ip = '0.0.0.0'
+# Allow all origins
+c.NotebookApp.allow_origin = '*'
+# Do not open browser by default
+c.NotebookApp.open_browser = False
+# Fix port to 8888
+c.NotebookApp.port = 8888
+--  now press escape and then wq!
+Now come out to main home directory and run jupyter Notebook command:
+$ cd
+$ jupyter notebook
+Now go to the browser and for me, Chrome didn't work and didn't let me pass through the security warning so I use Safari which gives me a lame warning before letting me in:
+copy your DNS from Ec2 and paste it as mentioned below:
+https://DNS:8888
+DNS  = ec2-52-15-252-200.us-east-2.compute.amazonaws.com
+so actually you will be pasting in browser(Safari):
+https://ec2-52-15-252-200.us-east-2.compute.amazonaws.com:8888
+Due to security reasons jupyter notebook will ask you token, which you can get easily from your terminal:
+[I 21:52:47.706 NotebookApp] Serving notebooks from local directory: /home/ubuntu
+[I 21:52:47.707 NotebookApp] The Jupyter Notebook is running at:
+[I 21:52:47.707 NotebookApp] https://ip-172-31-16-113:8888/?token=675a256b95cd7ae813217424243deeed4908f8b46ea1a252
+[I 21:52:47.707 NotebookApp] or https://127.0.0.1:8888/?token=675a256b95cd7ae813217424243deeed4908f8b46ea1a252
+(Don't worry I change some of the values so you won't be able to access my virtual machine ;)
+so copy this token and paste it in Jupyter Notebook and it will let you in!
+Now press CTRL+C to end your session for further installations:
+
+Installing Java and Scala:
+$ sudo apt-get update
+$ sudo apt-get install default-jre
+$ java -version
+$ sudo apt-get install scala
+$ scala –version
+
+Now install PIP:
+export PATH=$PATH:$HOME/anaconda3/bin
+conda install pip
+IMP: Execution will ask you to upgrade Conda but please don't upgrade by simply typing No when prompter will ask you.
+now install:
+$ pip install py4j
+$ now install Hadoop and Spark:
+$ wget https://ftp.nluug.nl/internet/apache/spark/spark-3.0.1/spark-3.0.1-bin-hadoop2.7.tgz # 여기 최신꺼로 바꿔야 함
+$ sudo tar -zxvf spark-3.0.1-bin-hadoop2.7.tgz
+
+$ export SPARK_HOME='/home/ubuntu/spark-3.0.1-bin-hadoop2.7'
+$ export PATH=$SPARK_HOME:$PATH
+$ export PYTHONPATH=$SPARK_HOME/python:$PYTHONPATH
+$ jupyter notebook
+
+Now again open Jupyter Notebook:
+$ Jupyter Notebook
+
+from pyspark import SparkContext
+sc = SparkContext()
+I hope this will work smoothly for you !! all the best!
+
+```
+
 
 # Python basics
 ```
